@@ -10,6 +10,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './pages/nuevo-usuario/nuevo-usuario.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
 import { RouterModule } from '@angular/router';
+import { ReporteComponent } from './pages/reporte/reporte.component';
+import { TablaReporteComponent } from './pages/reporte/tabla-reporte/tabla-reporte.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { RouterModule } from '@angular/router';
     NuevoComponent,
     UsuariosComponent,
     NuevoUsuarioComponent,
-    TicketComponent
+    TicketComponent,
+    ReporteComponent,
+    TablaReporteComponent
   ],
   imports: [
     CommonModule,

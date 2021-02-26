@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuariosService } from 'src/app/services/usuarios.service';
@@ -18,10 +19,20 @@ export class UsuariosComponent implements OnInit {
   is_active:boolean = false;
 
   public usuarios:Usuario[] = [];
+  public user:any = {Nombre:'Raul'};
   public total:number = 0;
   public desde:number = 0;
 
-  constructor(private usuarioService:UsuariosService) { }
+  usuarioAEditar: FormGroup = this.fb.group({
+    Nombre:[this.user.Nombre, Validators.required],
+    Apellido:[this.user.Apellido, Validators.required],
+    Correo:[this.user.Correo, Validators.required],
+    AnyDesk:[this.user.AnyDesk, Validators.required],
+    resetPass:['']
+  })
+
+  constructor(private usuarioService:UsuariosService,
+              private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.obtenerUsuarios(this.desde);
@@ -88,7 +99,26 @@ export class UsuariosComponent implements OnInit {
         .subscribe(resp => console.log(resp))
   }
 
-  editarUsuario(usuario:string){
+  editarUsuario(usuario:Usuario){
+    this.is_active = true;
+    this.cargando_ = true;
+    this.usuarioService.editarUnUsuario(usuario)
+      .subscribe((resp:any)=> {
+        this.user = resp.usuario;
+        // test
+        this.usuarioAEditar.get('Nombre').setValue(resp.usuario.Nombre)
+        this.usuarioAEditar.get('Apellido').setValue(resp.usuario.Apellido)
+        // test
+        this.cargando_ = false;
+      })
+  }
+
+  cerrarEdicion(){
+    this.is_active = false;
+    this.cargando_ = false;
+  }
+
+  editUser(){
 
   }
 

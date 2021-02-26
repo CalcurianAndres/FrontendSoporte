@@ -21,6 +21,7 @@
     "@angular/router": "~11.1.0",
     "bulma": "^0.9.2",
     "bulma-badge": "^3.0.1",
+    "bulma-calendar": "^6.0.9",
     "bulma-checkradio": "^1.1.1",
     "cool-checkboxes-for-bulma.io": "^1.1.0",
     "rxjs": "~6.6.0",

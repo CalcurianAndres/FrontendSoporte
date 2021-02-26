@@ -11,6 +11,7 @@ import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './pages/nuevo-usuario/nuevo-usuario.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
+import { ReporteComponent } from './pages/reporte/reporte.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,11 @@ const routes: Routes = [
         path:'ticket/:id',
         component:TicketComponent,
         data:{titulo:'Ticket'}
+      },
+      {
+        path:'estadisticas',
+        component:ReporteComponent,
+        data:{titulo:'Reporte'}
       }
     ]
   }

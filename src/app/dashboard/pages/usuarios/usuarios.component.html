@@ -20,7 +20,6 @@
                     <th>AnyDesk</th>
                     <th>Role</th>
                     <th>Departamento</th>
-                    <th>Sede</th>
                     <th>Accion</th>
                 </tr>
             </thead>
@@ -50,27 +49,25 @@
                         </select>
                     </td>
                     <td>
-                        <select [(ngModel)]="usuario.Sede"
-                        (change)="cambiarRole(usuario)">
-                        <option value="Orion">Orion</option>
-                        <option value="CDT">CDT</option>
-                        <option value="Mystic Brands">Mystic Brands</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="icon-text">                             
-                            <a (click)='editarUsuario(usuario._id)'>
-                                <span class="icon has-text-danger">
-                                    <i class="fas fa-user-edit"></i>
-                                </span>
-                            </a>
-                        </div>  
-                        <div class="icon-text">                             
-                            <a (click)='borrarUsuario(usuario._id)'>
-                                <span class="icon has-text-danger">
-                                    <i class="fas fa-user-minus"></i>
-                                </span>
-                            </a>
+                        <div class="columns">
+                            <div class="column">
+                                <div class="icon-text">                             
+                                    <a (click)='editarUsuario(usuario._id)'>
+                                        <span class="icon has-text-success">
+                                            <i class="fas fa-user-edit"></i>
+                                        </span>
+                                    </a>
+                                </div>  
+                            </div>
+                            <div class="column">
+                                <div class="icon-text">                             
+                                    <a (click)='borrarUsuario(usuario._id)'>
+                                        <span class="icon has-text-danger">
+                                            <i class="fas fa-user-minus"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -88,11 +85,13 @@
     <div class="modal-background"></div>
     <div class="modal-card">
         <!-- INICIO DEL FORM PARA MODIFICAR -->
-        <form>
+        <form autocomplete="off"
+        [formGroup]="usuarioAEditar"
+        (ngSubmit)="editUser()"> 
 
             <header class="modal-card-head">
                 <p class="modal-card-title">Modificar usuario</p>
-                <button class="delete" aria-label="close"></button>
+                <button class="delete" aria-label="close" (click)='cerrarEdicion()'></button>
             </header>
             <section class="modal-card-body">
                 <div class="level" *ngIf="cargando_">
@@ -104,31 +103,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">Nombre</label>
+                <div *ngIf="!cargando_">
+            
+                    <div class="field">
+                        <label class="label">Nombre</label>
                     <div class="control has-icons-left has-icons-right">
-                        <input class="input" type="text">
+                        <input class="input" type="text"
+                        formControlName='Nombre'>
                         <span class="icon is-small is-left">
                             <i class="fas fa-user fa-xs"></i>
                         </span>
                     </div>
                     <label class="label">Apellido</label>
-            <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text">
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" 
+                        formControlName='Apellido'>
                 <span class="icon is-small is-left">
                     <i class="fas fa-user fa-xs"></i>
                 </span>
             </div>
             <label class="label">Correo</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text">
+                <input class="input" type="text"
+                formControlName='Correo'>
                 <span class="icon is-small is-left">
                     <i class="fas fa-envelope fa-xs"></i>
                 </span>
             </div>
             <label class="label">AnyDesk</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text">
+                <input class="input" type="text"
+                formControlName='AnyDesk'>
                 <span class="icon is-small is-left">
                     <i class="fas fa-user fa-xs"></i>
                 </span>
@@ -140,15 +145,16 @@
                 type="checkbox" 
                 name="exampleCheckboxBackgroundColorSuccess" 
                 checked="checked"
-                formControlName='remember'>
+                formControlName='resetPass'>
                 <label for="exampleCheckboxBackgroundColorSuccess">Resetear contraseña (colocandole por defecto '123456').</label>
             </div>
         </div>
+    </div>
     </section>
     <footer class="modal-card-foot">
         <button class="button is-success">Guardar cambios</button>
-        <button class="button">Cancelar</button>
+        <button class="button" (click)='cerrarEdicion()'>Cancelar</button>
     </footer>
-</form>
+    </form>
 </div>
-  </div>
+</div>

@@ -87,5 +87,12 @@ export class UsuariosService {
 
   }
 
+  editarUnUsuario(data:Usuario){
+    const url = `${this.baseUrl}/usuario/${data}`;
+
+    return this.http.get(url, this.headers);
+
+  }
+
 }
 

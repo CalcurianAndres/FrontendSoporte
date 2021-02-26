@@ -1,0 +1,26 @@
+<b>
+</b>
+<p class="titulo">
+    REPORTE DEL DEPARTAMENTO DE SISTEMA DE xx/xx/2021 a xx/xx/2021
+</p>
+<br>
+<table class="table mt-3 is-narrow is-fullwidth table is-striped animate__animated animate__fadeIn">
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>Fecha</th>
+            <th>Nombre de Usuario</th>
+            <th>Asunto</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let ticket of reporte; let i = index'>
+            <td>{{i + 1}}</td>
+            <td>{{ticket.fecha | date:'dd/MM/yyyy'}}</td>
+            <td>{{ticket.usuario[0].Nombre}} {{ticket.usuario[0].Apellido}}</td>
+            <td>{{ticket.titulo}}</td>
+            <td>{{ticket.estado}}</td>
+        </tr>
+    </tbody>
+</table>
