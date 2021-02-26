@@ -7,11 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReporteComponent implements OnInit {
 
+  reporteNuevo:boolean = false;
+  fechaDesde:any;
+  fechaHasta:any;
+
   constructor() { 
     
   }
 
   ngOnInit(): void {
+  }
+
+  generarReporte(desde:any, hasta:any){
+
+    this.fechaDesde = desde.value;
+    this.fechaHasta = hasta.value;
+
+    this.reporteNuevo = true;
   }
 
 }

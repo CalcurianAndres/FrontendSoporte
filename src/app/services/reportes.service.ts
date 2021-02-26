@@ -22,9 +22,9 @@ export class ReportesService {
     } 
    }
 
-   generarReporte(){
+   generarReporte(desde:any, hasta:any){
 
-    const url = `${this.baseUrl}/reporte`;
+    const url = `${this.baseUrl}/reporte?desde=${desde}&hasta=${hasta}`;
 
     return this.http.get(url);
 

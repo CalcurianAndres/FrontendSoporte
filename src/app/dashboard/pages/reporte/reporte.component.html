@@ -2,12 +2,16 @@
     <div class="card-content">
         <strong>Generar reporte:</strong>
         <br><br>
-        De: <input type="date">  Hasta: <input type="date"><br><br>
-        <button class="button is-success">Generar Reporte</button>
+        De: <input type="date" #desde>  Hasta: <input type="date" #hasta><br><br>
+        <button class="button is-success"
+            (click)='generarReporte(desde, hasta)'>Generar Reporte</button>
     </div>
 </div>
-<div class="card mt-3">
+<div class="card mt-3" *ngIf='reporteNuevo'>
     <div class="card-content">
-        <app-tabla-reporte></app-tabla-reporte>
+        <app-tabla-reporte
+        [since]='fechaDesde'
+        [hasta]='fechaHasta'>
+        </app-tabla-reporte>
     </div>
 </div>

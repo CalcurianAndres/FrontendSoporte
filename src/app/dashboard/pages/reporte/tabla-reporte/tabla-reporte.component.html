@@ -1,10 +1,26 @@
 <b>
 </b>
 <p class="titulo">
-    REPORTE DEL DEPARTAMENTO DE SISTEMA DE xx/xx/2021 a xx/xx/2021
+    REPORTE DEL DEPARTAMENTO DE SISTEMA DE {{since}} a {{hasta}}
 </p>
 <br>
-<table class="table mt-3 is-narrow is-fullwidth table is-striped animate__animated animate__fadeIn">
+<div class="level" *ngIf="cargando">
+    <div class="level-item has-text-centered">
+        <div>
+            <p class="heading">Cargando.</p>
+            <p class="title"><i class="fas fa-circle-notch fa-pulse"></i></p>
+            <p class="tittle">Por favor espere...</p>
+        </div>
+    </div>
+</div>
+<div class="level" *ngIf="!cargando && reporte.length === 0">
+    <div class="level-item has-text-centered">
+        <div>
+            no hay tickets en la fecha solicitada
+        </div>
+    </div>
+</div>
+<table class="table mt-3 is-narrow is-fullwidth table is-striped animate__animated animate__fadeIn" *ngIf="!cargando && reporte.length > 0">
     <thead>
         <tr>
             <th>N°</th>
