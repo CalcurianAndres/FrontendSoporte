@@ -2,16 +2,14 @@
     <div class="card-content">
         <strong>Generar reporte:</strong>
         <br><br>
-        De: <input type="date" #desde>  Hasta: <input type="date" #hasta><br><br>
-        <button class="button is-success"
-            (click)='generarReporte(desde, hasta)'>Generar Reporte</button>
-    </div>
-</div>
-<div class="card mt-3" *ngIf='reporteNuevo'>
-    <div class="card-content">
-        <app-tabla-reporte
-        [since]='fechaDesde'
-        [hasta]='fechaHasta'>
-        </app-tabla-reporte>
+        <form autocomplete="off"
+        [formGroup]="fechasForm"
+        (ngSubmit)="generarReporte()">
+            De: <input type="date" 
+                    formControlName='desde'>  
+            Hasta: <input type="date"
+                    formControlName='hasta'><br><br>
+            <button class="button is-success">Generar Reporte</button>
+        </form>
     </div>
 </div>

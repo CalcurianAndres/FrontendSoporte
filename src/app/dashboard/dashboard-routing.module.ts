@@ -11,7 +11,7 @@ import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './pages/nuevo-usuario/nuevo-usuario.component';
 import { TicketComponent } from './pages/ticket/ticket.component';
-import { ReporteComponent } from './pages/reporte/reporte.component';
+import { TablaReporteComponent } from './pages/reporte/tabla-reporte/tabla-reporte.component';
 
 const routes: Routes = [
   {
@@ -60,7 +60,7 @@ const routes: Routes = [
       },
       {
         path:'estadisticas',
-        component:ReporteComponent,
+        component:TablaReporteComponent,
         data:{titulo:'Reporte'}
       }
     ]

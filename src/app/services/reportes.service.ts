@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { tap } from 'rxjs/operators';
+import { reporte } from '../dashboard/interfaces/tickets.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class ReportesService {
 
     const url = `${this.baseUrl}/reporte?desde=${desde}&hasta=${hasta}`;
 
-    return this.http.get(url);
+    return this.http.get<reporte>(url)
 
    }
 }

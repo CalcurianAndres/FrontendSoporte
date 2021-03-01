@@ -19,12 +19,16 @@ export interface ticketObtenidos {
 }
 
 export interface notificacionForm{
-    estado:string,
-    usuario:string,
-    mensaje:string
+    estado:string;
+    usuario:string;
+    mensaje:string;
 }
 
 export interface comentarioForm{
-    dueno:string,
-    mensaje:string
+    dueno:string;
+    mensaje:string;
+}
+
+export interface reporte{
+    tickets:Ticket[],
 }

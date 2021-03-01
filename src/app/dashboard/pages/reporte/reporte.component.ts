@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { fechasReporte } from '../../interfaces/reportes.interface';
 
 @Component({
   selector: 'app-reporte',
@@ -11,18 +13,28 @@ export class ReporteComponent implements OnInit {
   fechaDesde:any;
   fechaHasta:any;
 
-  constructor() { 
+  fechasForm: FormGroup = this.fb.group({
+    desde:['',Validators.required],
+    hasta:['',Validators.required]
+  })
+
+
+  @Output() onNewReporte: EventEmitter<fechasReporte> = new EventEmitter();
+
+  constructor(private fb:FormBuilder) { 
     
   }
 
   ngOnInit(): void {
   }
 
-  generarReporte(desde:any, hasta:any){
+  generarReporte(){
 
-    this.fechaDesde = desde.value;
-    this.fechaHasta = hasta.value;
+    if(this.fechasForm.invalid) {
+      return;
+    }
 
+    this.onNewReporte.emit(this.fechasForm.value);
     this.reporteNuevo = true;
   }
 
