@@ -3,8 +3,13 @@ import { ReportesService } from 'src/app/services/reportes.service';
 import { Ticket } from 'src/app/models/ticket.model';
 import { fechasReporte } from 'src/app/dashboard/interfaces/reportes.interface';
 
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { AuthService } from 'src/app/services/auth.service';
+import { Usuario } from 'src/app/models/usuario.model';
+
+import { PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-tabla-reporte',
@@ -17,32 +22,61 @@ export class TablaReporteComponent implements OnInit {
   public reporte:Ticket[];
   public cargando:boolean = true;
   public seRealizoReporte:boolean = false;
+  public usuario:Usuario;
 
   hasta:string;
   desde:string;
 
-  constructor(private reporteService:ReportesService) { }
+  constructor(private reporteService:ReportesService,
+              private auth:AuthService) { 
+                this.usuario = auth.usuario
+              }
 
   ngOnInit(): void {
 
   }
 
   public openPDF():void{
-    let DATA = document.getElementById('reporteGenerado')
 
-    html2canvas(DATA).then(canvas => {
-
-      let fileWidth = 208;
-      let fileHeight = canvas.height * fileWidth / canvas.width;
-
-      const FILEURI = canvas.toDataURL('image/png')
-      let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
     
-      PDF.save(`REPORTE - DE ${this.desde} HASTA ${this.hasta}.pdf`);
+    const PDF:PdfMakeWrapper = new PdfMakeWrapper();
 
-    })
+    PDF.header(`Reporte departamento: ${this.usuario.Departamento}`);
+
+    PDF.add(
+      new Txt('REPORTE DEL DEPARTAMENTO DE SISTEMAS').alignment('center').end 
+    )
+    PDF.add(
+      new Txt(`de ${this.desde} hasta ${this.hasta}`).alignment('center').italics()
+      .end 
+    )
+    PDF.add(
+      new Txt('Casos atendidos por el departamento').alignment('center').italics()
+      .end 
+    )
+
+    PDF.add(
+      new Table([
+        ['Fecha','Usuario','Asunto','Status']
+      ]).widths(['14%', '25%', '36%', '25%']).end
+    )
+    
+    for (let i = 0; i < this.reporte.length; i++) {
+      
+      const user = this.reporte[i].usuario;
+      const Nusuario = `${user[0].Nombre} ${user[0].Apellido}`
+      const fecha = new Date(this.reporte[i].fecha);
+      const fechaCorta = `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+      
+      PDF.add(
+        new Table([
+          [fechaCorta, Nusuario, this.reporte[i].titulo,this.reporte[i].estado]
+        ]).widths(['14%', '25%', '36%', '25%']).end
+      )
+    }
+
+
+    PDF.create().download('Reporte Departamento de Sitemas');
   }
 
   generarReporte(fechas:fechasReporte){

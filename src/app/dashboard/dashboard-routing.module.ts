@@ -18,6 +18,7 @@ const routes: Routes = [
     path:'dashboard',
     canActivate:[AuthGuard],
     component:DashboardComponent,
+    data:{raiz:'Dashboard'},
     children:[
       {
         path:'',

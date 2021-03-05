@@ -11,18 +11,22 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { MainComponent } from './dashboard/pages/main/main.component';
 import { Page404Component } from './page404/page404.component';
 import { SharedModule } from './shared/shared.module';
+import { MonitoreoComponent } from './monitoreo/monitoreo.component';
+import { MonitoreoModule } from './monitoreo/monitoreo.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     MainComponent,
-    Page404Component
+    Page404Component,
+    MonitoreoComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     DashboardModule,
+    MonitoreoModule,
     AuthModule,
     SharedModule,
     AppRoutingModule

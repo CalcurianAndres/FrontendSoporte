@@ -25,6 +25,8 @@
     "bulma-checkradio": "^1.1.1",
     "cool-checkboxes-for-bulma.io": "^1.1.0",
     "jspdf": "^2.3.0",
+    "pdfmake": "^0.1.70",
+    "pdfmake-wrapper": "^2.1.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.15.1",
     "tslib": "^2.0.0",

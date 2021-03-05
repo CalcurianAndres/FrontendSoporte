@@ -16,6 +16,10 @@ const routes: Routes = [
     canLoad: [AuthGuard]
   },
   {
+    path:'monitoreo',
+    loadChildren: ()=> import('./monitoreo/monitoreo.module').then(m => m.MonitoreoModule)
+  },
+  {
     path:'',
     redirectTo:'/dashboard',
     pathMatch: 'full'
