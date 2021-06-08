@@ -94,5 +94,11 @@ export class UsuariosService {
 
   }
 
+  resetPassword(id:string){
+    const url = `${this.baseUrl}/reset/${id}`;
+
+    return this.http.get(url);
+  }
+
 }
 

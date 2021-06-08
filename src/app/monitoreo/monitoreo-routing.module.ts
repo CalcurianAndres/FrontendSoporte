@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MonitoreoComponent } from './monitoreo.component';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { MainComponent } from './pages/main/main.component';
 
-const routes:Routes = [
+const routes: Routes = [
   {
     path:'monitoreo',
-    component:MonitoreoComponent
+    canActivate:[AuthGuard],
+    component:MonitoreoComponent,
+    children:[
+      {
+        path:'',
+        component:MainComponent
+      }
+    ]
   }
-] 
+]
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forChild( routes )
   ],
-  exports: [
+  exports:[
     RouterModule
   ]
 })

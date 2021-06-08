@@ -122,4 +122,24 @@ export class UsuariosComponent implements OnInit {
 
   }
 
+  resetPass(id:string){
+    Swal.fire({
+      title: 'Restablecer contraseña?',
+      text: "La contraseña del usuario sera restablecida a '123456'",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText:'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Restablecer!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.resetPassword(id)
+          .subscribe((resp:any) => {
+            Swal.fire('Listo', resp.mensaje, 'success');
+          })
+      }
+    })
+  }
+
 }

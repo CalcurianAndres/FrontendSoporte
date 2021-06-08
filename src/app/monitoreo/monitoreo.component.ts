@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-monitoreo',
   templateUrl: './monitoreo.component.html',
-  styleUrls: ['./monitoreo.component.scss']
+  styles: [
+  ]
 })
 export class MonitoreoComponent implements OnInit {
 
@@ -11,5 +12,6 @@ export class MonitoreoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
 }

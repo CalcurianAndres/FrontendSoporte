@@ -27,7 +27,7 @@
                 <tr *ngFor="let usuario of usuarios">
                     <td>
                         <figure class="image is-32x32">
-                            <img class="is-rounded" [src]='usuario.mostrarImagen()'>
+                            <img class="is-rounded" [src]='usuario.mostrarImagen()' (click)='resetPass(usuario._id)'>
                         </figure>
                     </td>
                     <td>{{usuario.Nombre}}</td>

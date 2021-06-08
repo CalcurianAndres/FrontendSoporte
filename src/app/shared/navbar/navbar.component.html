@@ -9,7 +9,7 @@
         <span></span>
       </div>
     </div>
-    <div class="navbar-brand">
+    <div class="navbar-brand" *ngIf='usuario.Role === "ADMIN_ROLE" && usuario.Departamento == "soporte"'>
       <a routerLink='/dashboard' routerLinkActive='is-active' class="navbar-item">Dashboard</a>
       <a routerLink='/monitoreo' routerLinkActive='is-active' class="navbar-item">Monitoreo</a>
     </div>
@@ -20,7 +20,7 @@
             <figure class="image is-32x32">
                 <img class="is-rounded" [src]="usuario.mostrarImagen()">
               </figure>
-             {{usuario.Nombre}} {{usuario.Apellido}}
+             {{usuario.Nombre}} {{usuario.Apellido}} 
           </a>
           <div class="navbar-dropdown is-boxed">
             <a class="navbar-item" routerLink='perfil'>
